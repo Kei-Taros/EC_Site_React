@@ -1,0 +1,30 @@
+import React from 'react'
+import { Switch, Route } from "react-router-dom";
+import { SignIn, Home, SignUp, Reset, ProductEdit } from './templates'
+import Auth from "./Auth"
+
+function Router() {
+  console.log("Router");
+  return (
+
+    /* <BrowserRouter>だとpush(url)でページ遷移ができない */
+    /* →Switchに変更(react-router-dom:Ver.5系) */
+    <Switch>
+      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/signin" component={SignIn} />
+      <Route exact path="/signin/reset" component={Reset} />
+
+      <Auth>
+        <Route exact path="(/)?" component={Home} />
+        <Route exact path="/product/edit" component={ProductEdit} />
+      </Auth>
+    </Switch>
+  )
+}
+export default Router;
+
+/*
+ [ソースコード概略]
+ 各ページごとにリンクを設定している
+ */
+
