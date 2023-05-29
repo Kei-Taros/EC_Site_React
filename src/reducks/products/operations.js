@@ -3,7 +3,7 @@ import { push } from "connected-react-router";
 
 const productsRef = db.collection("products")
 
-export function saveProduct(name, description, category, gender, price) {
+export function saveProduct(name, description, category, gender, price, images) {
   return async (dispatch) => {
     const timestamp = FirebaseTimestamp.now()
 
@@ -13,6 +13,7 @@ export function saveProduct(name, description, category, gender, price) {
       category: category,
       gender: gender,
       price: parseInt(price, 10),
+      images: images,
       updated_at:timestamp
     }
 
@@ -31,3 +32,7 @@ export function saveProduct(name, description, category, gender, price) {
   }
 }
 
+/*
+ [ソースコード概略]
+ データベースに保存する処理
+ */

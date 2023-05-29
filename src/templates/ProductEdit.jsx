@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react"
-import { TextInput, SelectBox, PrimaryButton} from "../components/UIkit"
+import { TextInput, SelectBox, PrimaryButton } from "../components/UIkit"
+import { ImageArea } from "../components/Products"
 import { saveProduct } from "../reducks/products/operations"
 import { useDispatch } from "react-redux"
 
@@ -12,6 +13,7 @@ function ProdictEdit() {
         [description, setDescription] = useState(""),
         [category, setCategory] = useState(""),
         [gender, setGender] = useState(""),
+        [images, setImages] = useState([]),
         [price, setPrice] = useState("");
 
   
@@ -43,6 +45,7 @@ function ProdictEdit() {
     <section>
       <h2 className="u-text__headline u-text-center">Product Registration/Editing</h2>
       <div className="c-section-container">
+        <ImageArea images={images} setImages={setImages} />
         <TextInput
           fullwidth={true} label={"Product Name"} multiline={false} required={true}
           onChange={inputName} minRows={1} value={name} type={"text"}
@@ -65,7 +68,7 @@ function ProdictEdit() {
         <div className="center">
           <PrimaryButton
             label={"Save"}
-            onClick={() => dispatch(saveProduct(name, description, category, gender, price))}
+            onClick={() => dispatch(saveProduct(name, description, category, gender, price, images))}
           />
         </div>
       </div>
