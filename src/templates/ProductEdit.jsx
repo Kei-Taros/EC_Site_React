@@ -1,22 +1,28 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useState, useEffect } from "react"
 import { TextInput, SelectBox, PrimaryButton } from "../components/UIkit"
-import { ImageArea } from "../components/Products"
+import { ImageArea, SetSizeArea } from "../components/Products"
 import { saveProduct } from "../reducks/products/operations"
 import { useDispatch } from "react-redux"
+import {db} from "../firebase/index"
 
 function ProdictEdit() {
 
   const dispatch = useDispatch()
+  let id = window.location.pathname.split("/product/edit")[1];
 
+  //¤•iî•ñ‚ÌID‚¾‚¯‚ðŽæ‚èo‚·
+  if (id !== "") {
+    id = id.split("/")[1]
+  }
 
   const [name, setName] = useState(""),
         [description, setDescription] = useState(""),
         [category, setCategory] = useState(""),
         [gender, setGender] = useState(""),
         [images, setImages] = useState([]),
-        [price, setPrice] = useState("");
+        [price, setPrice] = useState(""),
+        [sizes, setSizes] = useState([]);
 
-  
   const inputName = useCallback((event) => {
     setName(event.target.value)
   }, [setName]);
@@ -41,6 +47,22 @@ function ProdictEdit() {
     { id: "female", name: "Women" },
   ];
 
+  useEffect(() => {
+    if (id !== "") {
+      db.collection("products").doc(id).get()
+        .then(snapshot => {
+          const data = snapshot.data();
+          setName(data.name);
+          setDescription(data.description);
+          setCategory(data.category);
+          setGender(data.gender);
+          setImages(data.images);
+          setPrice(data.price);
+          setSizes(data.sizes)
+        })
+    }
+  }, [id]);
+
   return (
     <section>
       <h2 className="u-text__headline u-text-center">Product Registration/Editing</h2>
@@ -64,11 +86,13 @@ function ProdictEdit() {
           fullwidth={true} label={"Price"} multiline={false} required={true}
           onChange={inputPrice} minRows={1} value={price} type={"number"}
         />
-        <div className="module-spacer--medium" />
+        <div className="module-spacer--small" />
+        <SetSizeArea sizes={sizes} setSizes={setSizes} />
+        <div className="module-spacer--small" />
         <div className="center">
           <PrimaryButton
             label={"Save"}
-            onClick={() => dispatch(saveProduct(name, description, category, gender, price, images))}
+            onClick={() => dispatch(saveProduct(id, name, description, category, gender, price, images,sizes))}
           />
         </div>
       </div>
