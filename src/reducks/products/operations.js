@@ -1,7 +1,22 @@
 import { db, FirebaseTimestamp } from "../../firebase/index";
 import { push } from "connected-react-router";
+import { fetchProductsAction, deleteProductAction } from "./actions";
 
 const productsRef = db.collection("products")
+
+export function fetchProducts() {
+  return async (dispatch) => {
+    productsRef.orderBy("updated_at", "desc").get()
+      .then(snapshots => {
+        const productList = []
+        snapshots.forEach(snapshot => {
+          const product = snapshot.data();
+          productList.push(product)
+        })
+        dispatch(fetchProductsAction(productList))
+      })
+  }
+}
 
 export function saveProduct(id, name, description, category, gender, price, images, sizes) {
   return async (dispatch) => {
@@ -21,7 +36,7 @@ export function saveProduct(id, name, description, category, gender, price, imag
 
     if (id === "") {
       const ref = productsRef.doc()//自動でIDが生成される
-      const id = ref.id
+      id = ref.id
       data.id = id
       data.created_at = timestamp
     }
@@ -36,7 +51,20 @@ export function saveProduct(id, name, description, category, gender, price, imag
   }
 }
 
+export function deleteProduct(id) {
+  return async (dispatch, getState) => {
+    productsRef.doc(id).delete()
+      .then(() => {
+        const prevProducts = getState().products.list;
+        const nextProducts = prevProducts.filter(product => product.id !== id)
+        dispatch(deleteProductAction(nextProducts))
+
+      })
+  }
+
+}
+
 /*
  [ソースコード概略]
- データベースに保存する処理
+ データベースにある商品情報を保存・削除する処理
  */

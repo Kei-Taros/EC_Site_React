@@ -27,6 +27,10 @@ function Home() {
       <div>
         Product Edit to <Link to={`/product/edit`}>this.</Link>
       </div>
+      
+      <div>
+        Product List to <Link to={`/productlist`}>this.</Link>
+      </div>
       <p>id:{uid}</p>
       <p>name:{username}</p>
     </div>

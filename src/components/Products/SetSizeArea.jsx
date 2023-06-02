@@ -40,9 +40,9 @@ function SetSizeArea(props) {
     setQuantity(event.target.value)
   }, [setQuantity]);
 
+  //Validation
   const addSize = (index, size, quantity) => {
     if (size === "" || quantity === "") {
-      //Validation
       return false
     }
     else {
@@ -112,20 +112,25 @@ function SetSizeArea(props) {
             )}
           </TableBody>
         </Table>
-        <div>
-          <TextInput
-            fullwidth={false} label={"size"} multiline={false} required={true}
-            onChange={inputSize} minRows={1} value={size} type={"text"}
-          />
-          <TextInput
-            fullwidth={false} label={"Volume"} multiline={false} required={true}
-            onChange={inputQuantity} minRows={1} value={quantity} type={"number"}
-          />
-        </div>
+        <Table>
+          <td>
+            <TextInput
+              fullwidth={false} label={"size"} multiline={false} required={true}
+              onChange={inputSize} minRows={1} value={size} type={"text"}
+            />
+          </td>
+          <td>
+            <TextInput
+              fullwidth={false} label={"Volume"} multiline={false} required={true}
+              onChange={inputQuantity} minRows={1} value={quantity} type={"number"}
+            />
+          </td>
+        </Table>
         <IconButton className={classes.checkIcon} onClick={() => addSize(index, size, quantity)}>
           <CheckCircleIcon />
         </IconButton>
       </TableContainer>
+      <div className="module-spacer--small" />
     </div>
 
     )

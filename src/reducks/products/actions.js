@@ -1,32 +1,19 @@
-export const SIGN_IN = "SIGN_IN";
-
-export function signInAction(userState) {
-  console.log("signaction");
+export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
+export function fetchProductsAction(products) {
   return {
-    type: "SIGN_IN",
-    payload: {
-      isSignedIn: true,
-      role: userState.role,
-      uid: userState.uid,
-      username: userState.username
-    }
+    type: "FETCH_PRODUCTS",
+    payload: products
   }
 };
 
-export const SIGN_OUT = "SIGN_OUT";
-
-export function signOutAction() {
+export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export function deleteProductAction(products) {
   return {
-    type: "SIGN_OUT",
-    payload: {
-      isSignedIn: false,
-      role: "",
-      uid: "",
-      username: ""
-    }
+    type: "DELETE_PRODUCT",
+    payload: products
   }
 };
 /*
  [ソースコード概略]
- dispatch()されたらデータをreducerに投げる
+
  */

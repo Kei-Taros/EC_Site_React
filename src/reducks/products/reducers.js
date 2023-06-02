@@ -3,7 +3,16 @@ import initialState from '../store/initialState';
 
 export function ProductsReducer(state = initialState.products, action) {
   switch (action.type) {
-
+    case Actions.FETCH_PRODUCTS:
+      return {
+        ...state,
+        list:[...action.payload]
+      }
+    case Actions.DELETE_PRODUCT:
+      return {
+        ...state,
+        list: [...action.payload]
+      }
     default:
       return state
   }
@@ -11,6 +20,5 @@ export function ProductsReducer(state = initialState.products, action) {
 
 /*
  [ソースコード概略]
- actionsから飛ばされたデータを振り分ける
- どんな感じで飛ばされてくるのかは不明
+
  */
