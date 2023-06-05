@@ -14,7 +14,7 @@ import { deleteProduct } from "../../reducks/products/operations";
 import { makeStyles } from "@material-ui/core/styles";
 //import { makeStyles } from "@material-ui/styles";
 //↑このimportだとカスタムテーマ作成になる為themeが使えず
-//[.breakpoints.down]が未定義となる
+//[.down]が未定義となる
 
 const useStyles = makeStyles((theme) => ({
 

@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/.vs/src/v16/.suo
+src/firebase/config.js
+cors.json

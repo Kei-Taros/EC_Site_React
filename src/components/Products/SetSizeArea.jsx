@@ -112,20 +112,14 @@ function SetSizeArea(props) {
             )}
           </TableBody>
         </Table>
-        <Table>
-          <td>
-            <TextInput
-              fullwidth={false} label={"size"} multiline={false} required={true}
-              onChange={inputSize} minRows={1} value={size} type={"text"}
-            />
-          </td>
-          <td>
-            <TextInput
-              fullwidth={false} label={"Volume"} multiline={false} required={true}
-              onChange={inputQuantity} minRows={1} value={quantity} type={"number"}
-            />
-          </td>
-        </Table>
+          <TextInput
+            fullwidth={false} label={"size"} multiline={false} required={true}
+            onChange={inputSize} minRows={1} value={size} type={"text"}
+          />
+          <TextInput
+            fullwidth={false} label={"Volume"} multiline={false} required={true}
+            onChange={inputQuantity} minRows={1} value={quantity} type={"number"}
+          />
         <IconButton className={classes.checkIcon} onClick={() => addSize(index, size, quantity)}>
           <CheckCircleIcon />
         </IconButton>
