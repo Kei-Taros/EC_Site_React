@@ -5,19 +5,20 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
 import MenuIcon from "@material-ui/icons/Menu"
 
-function HeaderMenus() {
+function HeaderMenus(props){
 
   return (
     <>
       <IconButton>
-        <Badge badgeContent={3} color="secondary">
+{/* Badge‚Éoverlap="rectangular"‚ğ’Ç‰Á‚µ‚È‚¢‚ÆƒGƒ‰[‚ª‹N‚«‚é */}
+        <Badge badgeContent={3} color="secondary" overlap="rectangular" >
           <ShoppingCartIcon />
         </Badge>
       </IconButton>
       <IconButton>
         <FavoriteBorderIcon />
       </IconButton>
-      <IconButton>
+      <IconButton onClick={(event) => props.handleDrawerToggle(event)} >
         <MenuIcon />
       </IconButton>
     </>
