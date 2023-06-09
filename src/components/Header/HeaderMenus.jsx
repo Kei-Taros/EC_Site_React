@@ -8,6 +8,7 @@ import { getProductsInCart, getUserId } from "../../reducks/users/selectors"
 import { useDispatch, useSelector } from "react-redux"
 import { db } from "../../firebase/index"
 import { fetchProductsInCart } from "../../reducks/users/operations"
+import { push } from "connected-react-router"
 
 function HeaderMenus(props) {
   const selector = useSelector((state) => state)
@@ -21,6 +22,7 @@ function HeaderMenus(props) {
         snapshots.docChanges().forEach(change => {
           const product = change.doc.data()
           const changeType = change.type
+          console.log("type:", changeType)
           
           switch (changeType) {
             case "added": //カートに商品を追加
@@ -47,7 +49,7 @@ function HeaderMenus(props) {
   
   return (
     <>
-      <IconButton>
+      <IconButton onClick={() => dispatch(push("/cart"))}>
 {/* Badgeにoverlap="rectangular"を追加しないとエラーが起きる */}
         <Badge badgeContent={produtsInCart.length} color="secondary" overlap="rectangular" >
           <ShoppingCartIcon />
