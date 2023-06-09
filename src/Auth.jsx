@@ -9,14 +9,12 @@ const Auth = ({ children }) => {
   const isSignedIn = getIsSignedIn(selector);
 
   useEffect(() => {
-    console.log("useEffect if");
     if (!isSignedIn) {
       dispatch(listenAuthState())
     }
   }, []);
 
   if (!isSignedIn) {
-    
     return <></>
   }
   else { //ƒTƒCƒ“ƒCƒ“‚µ‚Ä‚é‚©‚çHome‚É‚¢‚¯‚é

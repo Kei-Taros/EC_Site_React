@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { db } from '../firebase/index'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { db, FirebaseTimestamp } from '../firebase/index'
 import { makeStyles } from "@material-ui/core/styles"
 import HTMLReactParser from "html-react-parser"
-import { ImageSwiper, SizeTable} from "../components/Products"
+import { ImageSwiper, SizeTable } from "../components/Products"
+import { addProductToCart } from '../reducks/users/operations'
 
 const useStyles = makeStyles((theme) => ({
   sliderBox: {
@@ -53,6 +54,7 @@ function ProductDetail() {
   const selector = useSelector((state) => state)
   const path = selector.router.location.pathname
   const id = path.split("/product/")[1]
+  const dispach = useDispatch()
 
   const [product, setProduct] = useState(null)
 
@@ -65,7 +67,24 @@ function ProductDetail() {
         const data = doc.data();
         setProduct(data)
       })
-  },[])
+  }, [])
+
+//子コンポーネント(SizeTabele)で呼ぶためコールバック関数でメモ化する
+  const addProduct = useCallback((selectedSize) => {
+    const timeStamp = FirebaseTimestamp.now();
+    dispach(addProductToCart({
+      added_at: timeStamp,
+      description: product.description,
+      gender: product.gender,
+      images: product.images,
+      name: product.images,
+      price: product.price,
+      productId: product.id,
+      quantity: 1,
+      size: selectedSize
+    }))
+  }, [product])
+  //productが更新されたらaddProduct関数を再生成する
 
   return (
     <section className="c-section-wrapin">
@@ -78,7 +97,7 @@ function ProductDetail() {
             <h2 className="u-text__headline">{product.name}</h2>
             <p className={classes.price}>{product.price.toLocaleString()}</p>
             <div className="module-spacer--small" />
-            <SizeTable sizes={product.sizes} />
+            <SizeTable addProduct={addProduct} sizes={product.sizes} />
             <div className="module-spacer--small" />
             <p>{returnCodeToBr(product.description)}</p>
           </div>
@@ -90,3 +109,7 @@ function ProductDetail() {
 
 export default ProductDetail;
 
+/*
+ [ソースコード概略]
+ 商品の詳細ページ
+ */

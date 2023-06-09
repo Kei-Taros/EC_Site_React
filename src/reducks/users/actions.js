@@ -1,5 +1,4 @@
 export const SIGN_IN = "SIGN_IN";
-
 export function signInAction(userState) {
   console.log("signaction");
   return {
@@ -14,7 +13,6 @@ export function signInAction(userState) {
 };
 
 export const SIGN_OUT = "SIGN_OUT";
-
 export function signOutAction() {
   return {
     type: "SIGN_OUT",
@@ -26,6 +24,15 @@ export function signOutAction() {
     }
   }
 };
+
+export const FETCH_PRODUCTS_IN_CART = "FETCH_PRODUCTS_IN_CART";
+export function fetchProductsInCartAction(products) {
+  return {
+    type: "FETCH_PRODUCTS_IN_CART",
+    payload: products
+  }
+};
+
 /*
  [ソースコード概略]
  dispatch()されたらデータをreducerに投げる

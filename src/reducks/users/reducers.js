@@ -15,6 +15,13 @@ export function UsersReducer(state = initialState.users, action) {
       return {
         ...action.payload
       }
+
+    case Actions.FETCH_PRODUCTS_IN_CART:
+      return {
+        ...state,
+        //”z—ñ‚Å•Ô‚·
+        cart: [...action.payload]
+      }
   }
 }
 

@@ -15,7 +15,12 @@ export const getUserId = createSelector(
 export const getUsername = createSelector(
   [usersSelector],
   state => state.username
-)
+);
+
+export const getProductsInCart = createSelector(
+  [usersSelector],
+  state => state.cart
+);
 
 /*
  [ソースコード概略]

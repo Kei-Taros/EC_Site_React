@@ -66,11 +66,15 @@ function ClosableDrawer(props) {
         anchor="right"
         open={props.open}
         onClose={(e) => props.onClose(e)}
-        classes={{ paper: classes.drawerPaper }}
-        ModalProps={{ keepMounted: true}}
+        classes={{paper: classes.drawerPaper}}
+        ModalProps={{keepMounted: true}}
       >
-        <div>
-          <div className={ classes.searchField}>
+        <div
+//Tabキーで選択後Enterキーで決定してメニューを閉じる為の処理
+          onClose={(e) => props.onClose(e)}
+          onKeyDown={(e) => props.onClose(e)}
+        >
+          <div className={classes.searchField}>
             <TextInput
               fullwidth={false} label={"Enter Keyword"} multiline={false}
               onChange={inputKeyword} required={false} minRows={1} value={keyword} type={"text"}
