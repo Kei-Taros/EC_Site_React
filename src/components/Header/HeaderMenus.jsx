@@ -33,7 +33,7 @@ function HeaderMenus(props) {
               const index = produtsInCart.findIndex(product => product.cartId === change.doc.id)
               produtsInCart[index] = product
               break
-            case "remove": //カートの中身を削除
+            case "removed": //カートの中身を削除
               //change以外のアイテムを配列に入れる
               produtsInCart = produtsInCart.filter(product => product.cartId !== change.doc.id)
               break
