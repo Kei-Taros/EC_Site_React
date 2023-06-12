@@ -54,5 +54,5 @@ export default CartList
 
 /*
  [ソースコード概略]
-パスワードをリセットするページ
+
  */

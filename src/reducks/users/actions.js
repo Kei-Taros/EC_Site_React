@@ -31,6 +31,14 @@ export function fetchProductsInCartAction(products) {
     type: "FETCH_PRODUCTS_IN_CART",
     payload: products
   }
+}; 
+
+export const FETCH_ORDERS_HISTORY = "FETCH_ORDERS_HISTORY";
+export function fetchOrdersHistoryAction(history) {
+  return {
+    type: "FETCH_ORDERS_HISTORY",
+    payload: history
+  }
 };
 
 /*

@@ -22,6 +22,11 @@ export const getProductsInCart = createSelector(
   state => state.cart
 );
 
+export const getOrdersHistory = createSelector(
+  [usersSelector],
+  state => state.orders
+);
+
 /*
  [ソースコード概略]
  ユーザー情報を取得するための処理

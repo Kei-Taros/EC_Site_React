@@ -22,6 +22,11 @@ export function UsersReducer(state = initialState.users, action) {
         //”z—ñ‚Å•Ô‚·
         cart: [...action.payload]
       }
+    case Actions.FETCH_ORDERS_HISTORY:
+      return {
+        ...state,
+        orders: [...action.payload]
+      }
   }
 }
 

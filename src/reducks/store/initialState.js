@@ -4,7 +4,8 @@ const initialState = {
     isSignedIn: false,
     role:"",
     uid: "",
-    username: ""
+    username: "",
+    orders: []
   },
   products: {
     list:[]
