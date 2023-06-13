@@ -18,6 +18,7 @@ function ProdictEdit() {
   const [name, setName] = useState(""),
         [description, setDescription] = useState(""),
         [category, setCategory] = useState(""),
+        [categories, setCategories] = useState([]),
         [gender, setGender] = useState(""),
         [images, setImages] = useState([]),
         [price, setPrice] = useState(""),
@@ -35,15 +36,9 @@ function ProdictEdit() {
     setPrice(event.target.value)
   }, [setPrice]);
 
-  const categories = [
-    { id: "tops", name: "Tops" },
-    { id: "shirts", name: "Shirts" },
-    { id: "pants", name: "Pants" },
-  ];
-
   const genders = [
     { id: "all", name: "All" },
-    { id: "meal", name: "Men" },
+    { id: "male", name: "Men" },
     { id: "female", name: "Women" },
   ];
 
@@ -62,6 +57,21 @@ function ProdictEdit() {
         })
     }
   }, [id]);
+
+  useEffect(() => {
+    db.collection("categories").orderBy("order", "asc").get()
+      .then(snapshots => {
+        const list = []
+        snapshots.forEach(snapshot => {
+          const data = snapshot.data()
+          list.push({
+            id: data.id,
+            name: data.name
+          })
+        })
+        setCategories(list)
+      })
+  },[])
 
   return (
     <section>

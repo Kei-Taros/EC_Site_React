@@ -1,16 +1,10 @@
-﻿import React, { useCallback, useEffect, useMemo } from "react"
+﻿import React, { useEffect, } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import List from "@material-ui/core/List";
 import { makeStyles } from "@material-ui/core/styles";
 import { getOrdersHistory, getProductsInCart } from "../reducks/users/selectors";
 import { fetchOrdersHistory } from "../reducks/users/operations";
 import { OrderHistoryItem } from "../components/Products";
-
-
-import { Divider } from "@material-ui/core";
-import { push } from "connected-react-router";
-import { PrimaryButton, TextDetail } from "../components/UIkit";
-import { orderProduct } from "../reducks/products/operations";
 
 const useStyles = makeStyles((theme) => ({
   orderList: {

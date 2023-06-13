@@ -3,7 +3,6 @@ import Divider from "@material-ui/core/Divider"
 import { TextDetail } from "../UIkit"
 import { OrderedProducts } from "./index"
 
-
 const datetimeToString = (date) => {
   return date.getFullYear() + "-"
     + ("00" + (date.getMonth() + 1)).slice(-2) + "-"
