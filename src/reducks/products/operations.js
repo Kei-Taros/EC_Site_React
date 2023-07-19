@@ -27,7 +27,7 @@ export function saveProduct(id, name, description, category, gender, price, imag
     const timestamp = FirebaseTimestamp.now()
 
     const data = {
-      name, name,
+      name: name,
       description: description,
       category: category,
       gender: gender,
